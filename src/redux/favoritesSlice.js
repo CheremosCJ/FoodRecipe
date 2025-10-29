@@ -1,13 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  favoriterecipes: [], // Updated to handle favorite articles
+  favoriteRecipes: [], // Updated to handle favorite articles
 };
 
 const favoritesSlice = createSlice({
   name: "favorites",
   initialState,
   reducers: {
+
+    toggleFavorite: (state, action) => {
+      const recipe = action.payload; // Expecting the entire article object
+      const existingIndex = state.favoriteRecipes.findIndex(
+        (item) => item.idFood === recipe.idFood // Assuming articles have an 'id' property
+      );
+      if (existingIndex > -1) {
+        state.favoriteRecipes.splice(existingIndex, 1); // Remove from favorites
+      } else {
+        state.favoriteRecipes.push(recipe); // Add to favorites
+      }
+    },
+
    
   },
 });

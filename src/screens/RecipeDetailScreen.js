@@ -1,4 +1,4 @@
-import {View,Text,ScrollView,TouchableOpacity,Image,StyleSheet,} from "react-native";
+import {View,Text,ScrollView,TouchableOpacity,Image,StyleSheet,FlatList,} from "react-native";
 import React from "react";
 import {
   widthPercentageToDP as wp,
@@ -9,30 +9,36 @@ import { useDispatch, useSelector } from "react-redux"; // Redux hooks
 import { toggleFavorite } from "../redux/favoritesSlice"; // Redux action
 
 export default function RecipeDetailScreen(props) {
-  const recipe = props.route.params; // recipe passed from previous screen
+  const food = props.route.params; // recipe passed from previous screen
 
   const dispatch = useDispatch();
   const favoriterecipes = useSelector(
-    (state) => state.favorites.favoriterecipes
+    (state) => state.favorites.favoriteRecipes
   );
   const isFavourite = favoriterecipes?.some(
-    (favrecipe) => favrecipe.idFood === recipe.idFood
-  ); // Check by idrecipe
+    (favrecipe) => favrecipe.idFood === food.idFood
+  ); // Check by idFood
 
   const navigation = useNavigation();
 
+
+
   const handleToggleFavorite = () => {
-    dispatch(toggleFavorite(recipe)); // Dispatch the recipe to favorites
+    dispatch(toggleFavorite(food)); // Dispatch the recipe to favorites
   };
 
   return (
     <ScrollView
       style={styles.container}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.scrollContent}
-    >
+      contentContainerStyle={styles.scrollContent} >
       {/* recipe Image */}
       <View style={styles.imageContainer} testID="imageContainer">
+
+        <Image
+          source={{ uri: food.recipeImage }}
+          style={styles.recipeImage}
+        />
      
       </View>
 
@@ -59,35 +65,87 @@ export default function RecipeDetailScreen(props) {
 
       {/* recipe Description */}
   
-        <View style={styles.contentContainer}>
-          {/* Title and Category */}
-          <View
-            style={styles.recipeDetailsContainer}
-            testID="recipeDetailsContainer"
-          >
-            <Text style={styles.recipeTitle} testID="recipeTitle">
-         
-              
-              </Text>
-            <Text style={styles.recipeCategory} testID="recipeCategory">
-              </Text>
+      <View style={styles.contentContainer}>
+        {/* Title and Category */}
+        <View style={styles.recipeDetailsContainer}
+          testID="recipeDetailsContainer" >
+          <Text style={styles.recipeTitle} testID="recipeTitle">
+        
+            {food.recipeName}
+            
+          </Text>
+          <Text style={styles.recipeCategory} testID="recipeCategory">
+            {"\n"}
+            {food.recipeCategory} | {food.recipeOrigin}
+            {"\n"}
+          
+          </Text>
+        </View>
+
+        {/* Time Services Calories Temp */}    
+        <View style={styles.miscContainer}>   
+          <View style={styles.miscItem}>
+            <Text style={styles.miscIcon}>🕒</Text>
+            <Text style={styles.miscText}>{food.Time}</Text>
           </View>
-          <View style={styles.miscContainer} testID="miscContainer">
-        
-      </View>
-
-      {/* Ingredients */}
-      <View style={styles.sectionContainer}>
-     
-      </View>
-
-      {/* Instructions */}
-      <View style={styles.sectionContainer} testID="sectionContainer">
-        
+          <View style={styles.miscItem}>
+            <Text style={styles.miscIcon}>👥</Text>
+            <Text style={styles.miscText}>{food.Servings}</Text>
+          </View>
+          <View style={styles.miscItem}>
+            <Text style={styles.miscIcon}>🔥</Text>
+            <Text style={styles.miscText}>{food.Cal}</Text>
+          </View>
+          <View style={styles.miscItem}>
+            <Text style={styles.miscIcon}>🎚️</Text>
+            <Text style={styles.miscText}>{food.Temp}</Text>
+          </View>
         </View>
-          {/* Description */}
-         
+
+
+        {/* Ingredients */}
+        <View style={styles.sectionContainer}>
+
+          <Text style={styles.sectionTitle} testID="recipeTitle">
+        
+              {"Ingredients"}
+              
+          </Text>
+            
+          <FlatList
+            data={food.ingredients} 
+            keyExtractor={item => item.idFood}
+            renderItem={({ item }) => ( 
+
+              <View style={styles.ingredientItem}>
+                <Text style={styles.ingredientBullet}>{'\u2022'}</Text> <Text style={styles.ingredientItem}>{item.measure}  -  {item.ingredientName}</Text>
+              </View>
+
+            )}
+          />
+            
+
         </View>
+
+        {/* Instructions */}
+        <View style={styles.sectionContainer} testID="sectionContainer">
+
+          <Text style={styles.sectionTitle} testID="recipeTitle">
+        
+              {"Instructions"}
+              
+          </Text>
+          <Text style={styles.recipeDetailsContainer} testID="recipeCategory">
+              {"\n"}
+              {food.recipeInstructions}
+              {"\n"}
+            
+          </Text>
+
+        </View>
+
+
+      </View>
     </ScrollView>
   );
 }
@@ -144,15 +202,43 @@ const styles = StyleSheet.create({
     fontSize: hp(3),
     fontWeight: "bold",
     color: "#4B5563", // text-neutral-700
+    textAlign: "center",
   },
+  containerTitle: {
+    fontSize: hp(3),
+    fontWeight: "bold",
+    color: "#4B5563", // text-neutral-700
+    textAlign: "left",
+  },
+
   recipeCategory: {
     fontSize: hp(2),
     fontWeight: "500",
     color: "#9CA3AF", // text-neutral-500
+    textAlign: "center",
   },
   sectionContainer: {
     marginBottom: hp(2),
   },
+
+  box: {
+
+    height: 150, // Define la altura del cuadrado
+    backgroundColor: '#cccccc', // Fondo gris claro
+    borderRadius: 20, // Bordes redondeados
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000', // Sombra para un mejor efecto visual
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+
   sectionTitle: {
     fontSize: hp(2.5),
     fontWeight: "bold",
@@ -232,21 +318,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(4),
   },
   miscItem: {
-    alignItems: "center",
     backgroundColor: "#F5F5F5",
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,
     elevation: 3,
+
+
   },
   miscIcon: {
     fontSize: hp(3.5),
     marginBottom: 5,
+    textAlign: 'center',
+    alignItems: "center",
   },
   miscText: {
     fontSize: hp(2),
     fontWeight: "600",
     fontFamily: "Lato",
+    alignItems: "center",
+    textAlign: 'center',
+
   },
   sectionContainer: {
     marginHorizontal: wp(5),

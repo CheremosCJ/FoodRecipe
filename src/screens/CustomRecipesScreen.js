@@ -28,7 +28,7 @@ import {
     );
     console.log('favoriteRecipe from custom',favoriteRecipe);
     
-    const isFavourite = favoriteRecipe.includes(recipe.idCategory); // Adjust this according to your recipe structure
+    const isFavourite = favoriteRecipe.includes(recipe.recipeName); // Adjust this according to your recipe structure
   
     if (!recipe) {
       return (
@@ -50,8 +50,8 @@ import {
       >
         {/* Recipe Image */}
         <View style={styles.imageContainer} testID="imageContainer">
-        {recipe.image && (
-            <Image source={{ uri: recipe.image }} style={styles.recipeImage} />
+          {recipe.image && (
+              <Image source={{ uri: recipe.image }} style={styles.recipeImage} />
           )}
         </View>
         <View
@@ -73,11 +73,11 @@ import {
   
         {/* Recipe Details */}
         <View style={styles.contentContainer} testID="contentContainer">
-        <Text style={styles.recipeTitle}>{recipe.title}</Text>
-  <View style={styles.sectionContainer}>
-    <Text style={styles.sectionTitle}>Content</Text>
-    <Text style={styles.contentText}>{recipe.description}</Text>
-  </View>
+          <Text style={styles.recipeTitle}>{recipe.recipeName}</Text>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Description</Text>
+            <Text style={styles.contentText}>{recipe.description}</Text>
+          </View>
         </View>
       </ScrollView>
     );

@@ -10,71 +10,136 @@ import {
   import React, { useEffect, useState } from "react";
   import AsyncStorage from "@react-native-async-storage/async-storage";
   import { useNavigation } from "@react-navigation/native";
+  import { useFocusEffect } from '@react-navigation/native';
   import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from "react-native-responsive-screen";
-  
+
+
   export default function MyRecipeScreen() {
     const navigation = useNavigation();
-    const [recipes, setrecipes] = useState([]);
+    const [recipe, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
-  
+    
     useEffect(() => {
-      const fetchrecipes = async () => {
+      const fetchrecipe = async () => {
+
+        const storedrecipes = await AsyncStorage.getItem("customRecipes");
+        if (storedrecipes) {
+          setRecipes(JSON.parse(storedrecipes));
+        }
+        setLoading(false); // Loading is complete
         
         };
+
+
   
-      fetchrecipes();
+      fetchrecipe();
     }, []);
+
+    const fetchrecipe1 = async () => {
+
+        const storedrecipes = await AsyncStorage.getItem("customRecipes");
+        if (storedrecipes) {
+          setRecipes(JSON.parse(storedrecipes));
+        }
+        setLoading(false); // Loading is complete
+        
+    };
+
   
-    const handleAddrecipe = () => {
+    
+
+    const handleAddRecipe = () => {
+
+      navigation.navigate("RecipesFormScreen", { onGoBack: fetchrecipe1 });
 
     };
   
-    const handlerecipeClick = (recipe) => {
+    const handleRecipeClick = (recipe) => {
+      
+      navigation.navigate("CustomRecipesScreen", { recipe });
 
     };
-    const deleterecipe = async (index) => {
+    const deleteRecipe = async (index) => {
+
+    try {
+      const updatedRecipes = [...recipe];
+      updatedRecipes.splice(index, 1); // Remove article from array
+      await AsyncStorage.setItem("customRecipes", JSON.stringify(updatedRecipes)); // Update AsyncStorage
+      setRecipes(updatedRecipes); // Update state
+      } catch (error) {
+        console.error("Error deleting the recipe:", error);
+      }
     
     };
   
-    const editrecipe = (recipe, index) => {
+    const editRecipe = (recipe, index) => {
+
+      navigation.navigate("RecipesFormScreen", { recipeToEdit: recipe, recipeIndex: index , onGoBack: fetchrecipe1 });
 
     };
-  
+
+
     return (
       <View style={styles.container}>
-        {/* Back Button */}
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backButtonText}>{"Back"}</Text>
-        </TouchableOpacity>
-  
-        <TouchableOpacity onPress={handleAddrecipe} style={styles.addButton}>
-          <Text style={styles.addButtonText}>Add New recipe</Text>
-        </TouchableOpacity>
+        <View style={styles.actionButtonsContainer}>
+          {/* Back Button */}
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Text style={styles.backButtonText}>Back</Text>
+          </TouchableOpacity>
+
+          
+          {/* Add new Button */}
+          <TouchableOpacity onPress={handleAddRecipe} style={styles.addButton}>
+            <Text style={styles.addButtonText}>Add New recipe</Text>
+          </TouchableOpacity>
+        </View>
   
         {loading ? (
           <ActivityIndicator size="large" color="#f59e0b" />
         ) : (
           <ScrollView contentContainerStyle={styles.scrollContainer}>
-            {recipes.length === 0 ? (
+            {recipe.length === 0 ? (
               <Text style={styles.norecipesText}>No recipes added yet.</Text>
             ) : (
-              recipes.map((recipe, index) => (
+              recipe.map((recipe, index) => (
                 <View key={index} style={styles.recipeCard} testID="recipeCard">
-                  <TouchableOpacity testID="handlerecipeBtn" onPress={() => handlerecipeClick(recipe)}>
-                  
-                    <Text style={styles.recipeTitle}>{recipe.title}</Text>
-                    <Text style={styles.recipeDescription} testID="recipeDescp">
-                  
+                  <TouchableOpacity testID="handlerecipeBtn" onPress={() => handleRecipeClick(recipe)}>
+
+                    {recipe.image && (
+                      <Image
+                      source={{ uri: recipe.image }}
+                      style={styles.recipeImage}
+                      />
+                    )}
+
+                    
+                    <Text style={styles.recipeTitle}>{recipe.recipeName}</Text>
+                    <Text style={styles.recipeDescription} testID="articleDescp">
+                      {recipe.description?.substring(0, 50) + "..."}
                     </Text>
+
+
                   </TouchableOpacity>
   
                   {/* Edit and Delete Buttons */}
                   <View style={styles.actionButtonsContainer} testID="editDeleteButtons">
                     
-                
+                    <TouchableOpacity
+                      onPress={() => editRecipe(recipe, index)}
+                      style={styles.editButton} 
+                      >
+                      <Text style={styles.editButtonText}>Edit</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => deleteRecipe(index)}
+                        style={styles.deleteButton}
+                      >
+                      <Text style={styles.deleteButtonText}>Delete</Text>
+                    </TouchableOpacity>
+
                   </View>
                 </View>
               ))
@@ -90,26 +155,34 @@ import {
       flex: 1,
       padding: wp(4),
       backgroundColor: "#F9FAFB",
+      justifyContent: "space-around",
     },
     backButton: {
-      marginBottom: hp(1.5),
-    },
-    backButtonText: {
-      fontSize: hp(2.2),
-      color: "#4F75FF",
-    },
-    addButton: {
-      backgroundColor: "#4F75FF",
+      backgroundColor: "rgba(170, 227, 160, 1)",
       padding: wp(.7),
       alignItems: "center",
       borderRadius: 5,
-      width:300,
-     marginLeft:500
+      width:200,
+      // marginLeft:500
+      // marginBottom: hp(2),
+    },
+    backButtonText: {
+      color: "#4F75FF",
+      // fontWeight: "600",
+      fontSize: hp(2.2),
+    },
+    addButton: {
+      backgroundColor: "rgba(170, 227, 160, 1)",
+      padding: wp(.7),
+      alignItems: "center",
+      borderRadius: 5,
+      width:200,
+      // marginLeft:500
       // marginBottom: hp(2),
     },
     addButtonText: {
-      color: "#fff",
-      fontWeight: "600",
+      color: "#4F75FF",
+      // fontWeight: "600",
       fontSize: hp(2.2),
     },
     scrollContainer: {

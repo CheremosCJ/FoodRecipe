@@ -107,6 +107,10 @@ export default function HomeScreen() {
       recipeOrigin: "British",
       cookingDescription: "Preheat the oven to 150C/300F/Gas 2. Toss the beef and flour together in a bowl with some salt and black pepper...",
       recipeTags: "Meat,Pie",
+      Time: "39 Mins",
+      Servings: "05 Servings",
+      Cal: "240 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Beef",
@@ -185,6 +189,10 @@ export default function HomeScreen() {
       recipeOrigin: "Vietnamese",
       cookingDescription: "In a medium bowl, toss cucumber with vinegar, salt, and sugar; set aside to pickle...",
       recipeTags: "Rice,Bowl",
+      Time: "45 Mins",
+      Servings: "04 Servings",
+      Cal: "193 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Ground Beef",
@@ -241,6 +249,10 @@ export default function HomeScreen() {
       recipeOrigin: "American",
       cookingDescription: "Preheat oven to 160°C/325°F. Rub brisket with salt, pepper, garlic powder, and onion powder...",
       recipeTags: "Roast,Pot",
+      Time: "40 Mins",
+      Servings: "02 Servings",
+      Cal: "233 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Beef Brisket",
@@ -306,6 +318,10 @@ export default function HomeScreen() {
       recipeOrigin: "French",
       cookingDescription: "Preheat the oven to 150°C. Heat oil in a large casserole, brown the beef, and set aside. In the same pot, sauté onions...",
       recipeTags: "Stew,Meat",
+      Time: "30 Mins",
+      Servings: "02 Servings",
+      Cal: "193 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Beef Chuck",
@@ -371,6 +387,10 @@ export default function HomeScreen() {
       recipeOrigin: "Russian",
       cookingDescription: "Heat butter in a pan, cook the beef strips until browned. Add onions, garlic, and mushrooms, sautéing until soft...",
       recipeTags: "Creamy,Meat",
+      Time: "35 Mins",
+      Servings: "05 Servings",
+      Cal: "150 Cal",
+      Temp: "Rare",
       ingredients: [
         {
           ingredientName: "Beef Sirloin",
@@ -428,6 +448,10 @@ export default function HomeScreen() {
       recipeOrigin: "Mexican",
       cookingDescription: "In a skillet, cook the beef until browned. Add onions, garlic, cumin, and chili powder, cooking for 5 minutes...",
       recipeTags: "Mexican,Taco",
+      Time: "28 Mins",
+      Servings: "04 Servings",
+      Cal: "88 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Ground Beef",
@@ -485,6 +509,10 @@ export default function HomeScreen() {
       recipeOrigin: "Indian",
       cookingDescription: "Cook chicken with spices, tomatoes, and onions until tender.",
       recipeTags: "Spicy,Curry",
+      Time: "35 Mins",
+      Servings: "03 Servings",
+      Cal: "103 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken",
@@ -521,6 +549,10 @@ export default function HomeScreen() {
       recipeOrigin: "Italian",
       cookingDescription: "Cook chicken with Alfredo sauce and serve with pasta.",
       recipeTags: "Pasta,Creamy",
+      Time: "55 Mins",
+      Servings: "02 Servings",
+      Cal: "120 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken",
@@ -548,6 +580,10 @@ export default function HomeScreen() {
       recipeOrigin: "Italian",
       cookingDescription: "Bread and fry chicken cutlets, then top with marinara sauce and cheese.",
       recipeTags: "Breaded,Cheesy",
+      Time: "45 Mins",
+      Servings: "04 Servings",
+      Cal: "180 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken Cutlets",
@@ -575,6 +611,10 @@ export default function HomeScreen() {
       recipeOrigin: "Japanese",
       cookingDescription: "Marinate chicken in teriyaki sauce and grill until cooked.",
       recipeTags: "Grilled,Asian",
+      Time: "40 Mins",
+      Servings: "05 Servings",
+      Cal: "175 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken",
@@ -598,6 +638,10 @@ export default function HomeScreen() {
       recipeOrigin: "Mexican",
       cookingDescription: "Cook chicken with bell peppers and onions, serve in tortillas.",
       recipeTags: "Mexican,Spicy",
+      Time: "25 Mins",
+      Servings: "04 Servings",
+      Cal: "235 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken",
@@ -625,6 +669,10 @@ export default function HomeScreen() {
       recipeOrigin: "American",
       cookingDescription: "Grill chicken and toss with romaine lettuce, croutons, and Caesar dressing.",
       recipeTags: "Salad,Healthy",
+      Time: "38 Mins",
+      Servings: "05 Servings",
+      Cal: "189 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken Breast",
@@ -656,6 +704,10 @@ export default function HomeScreen() {
       recipeOrigin: "American",
       cookingDescription: "Deep-fry chicken wings and toss in buffalo sauce.",
       recipeTags: "Spicy,Fried",
+      Time: "39 Mins",
+      Servings: "04 Servings",
+      Cal: "153 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken Wings",
@@ -679,6 +731,10 @@ export default function HomeScreen() {
       recipeOrigin: "American",
       cookingDescription: "Cook chicken with rice and seasonings in a single pot.",
       recipeTags: "Comfort Food,One-Pot",
+      Time: "32 Mins",
+      Servings: "04 Servings",
+      Cal: "113 Cal",
+      Temp: "Medium",
       ingredients: [
         {
           ingredientName: "Chicken",
@@ -729,12 +785,20 @@ export default function HomeScreen() {
         </View>
 
         <View testID="categoryList">
+
+          <Categories
+            categories={categories}
+            activeCategory={activeCategory}
+            handleChangeCategory={handleChangeCategory}
+          />
        
         </View>
 
         <View testID="foodList">
 
-          </View>
+          <FoodItems foods={filteredfoods} categories={categories} /> 
+
+        </View>
       </ScrollView>
     </View>
   );
