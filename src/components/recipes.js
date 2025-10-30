@@ -93,7 +93,4 @@ const styles = StyleSheet.create({
     marginLeft: wp(2),
     marginTop: hp(0.5),
   },
-  row: {
-    justifyContent: "space-between", // Align columns evenly
-  },
 });
