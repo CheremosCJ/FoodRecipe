@@ -27,7 +27,7 @@ export default function WelcomeScreen() {
     );
 
     setTimeout(() => navigation.navigate("Home"), 2500);
-  }, []);
+  },);
 
   return (
     <View style={styles.container}>
