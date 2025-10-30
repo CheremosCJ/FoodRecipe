@@ -204,13 +204,6 @@ const styles = StyleSheet.create({
     color: "#4B5563", // text-neutral-700
     textAlign: "center",
   },
-  containerTitle: {
-    fontSize: hp(3),
-    fontWeight: "bold",
-    color: "#4B5563", // text-neutral-700
-    textAlign: "left",
-  },
-
   recipeCategory: {
     fontSize: hp(2),
     fontWeight: "500",
@@ -220,96 +213,10 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginBottom: hp(2),
   },
-
-  box: {
-
-    height: 150, // Define la altura del cuadrado
-    backgroundColor: '#cccccc', // Fondo gris claro
-    borderRadius: 20, // Bordes redondeados
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000', // Sombra para un mejor efecto visual
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-
-
   sectionTitle: {
     fontSize: hp(2.5),
     fontWeight: "bold",
     color: "#4B5563", // text-neutral-700
-  },
-  descriptionText: {
-    fontSize: hp(1.8),
-    color: "#4B5563", // text-neutral-700
-    textAlign: "justify",
-    lineHeight: hp(2.5),
-  },
-  container: {
-    backgroundColor: "white",
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 30,
-  },
-  imageContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 20,
-  },
-  recipeImage: {
-    width: wp(98),
-    height: hp(45),
-    borderRadius: 20,
-    marginTop: 4,
-  },
-  topButtonsContainer: {
-    width: "100%",
-    position: "absolute",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: hp(4),
-  },
-  backButton: {
-    padding: 10,
-    borderRadius: 20,
-    backgroundColor: "#f0f0f0",
-    marginLeft: wp(5),
-  },
-  backButtonText: {
-    fontSize: hp(2),
-    color: "#333",
-    fontWeight: "bold",
-  },
-  favoriteButton: {
-    padding: 10,
-    borderRadius: 20,
-    marginRight: wp(5),
-  },
-  favoriteButtonText: {
-    fontSize: hp(2),
-    color: "red",
-  },
-  mealName: {
-    fontSize: hp(4),
-    fontWeight: "bold",
-    color: "#333",
-    textAlign: "center",
-    marginVertical: 10,
-    fontFamily: "Roboto",
-  },
-  mealCategory: {
-    fontSize: hp(2),
-    color: "#666",
-    textAlign: "center",
-    marginBottom: 20,
-    fontFamily: "Roboto",
   },
   miscContainer: {
     flexDirection: "row",
@@ -323,8 +230,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
     elevation: 3,
-
-
   },
   miscIcon: {
     fontSize: hp(3.5),
@@ -338,21 +243,6 @@ const styles = StyleSheet.create({
     fontFamily: "Lato",
     alignItems: "center",
     textAlign: 'center',
-
-  },
-  sectionContainer: {
-    marginHorizontal: wp(5),
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: hp(2.8),
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 10,
-    fontFamily: "Lato",
-  },
-  ingredientsList: {
-    marginLeft: wp(4),
   },
   ingredientItem: {
     flexDirection: "row",
@@ -369,34 +259,5 @@ const styles = StyleSheet.create({
     height: hp(1.5),
     width: hp(1.5),
     marginRight: wp(2),
-  },
-  ingredientText: {
-    fontSize: hp(1.9),
-    color: "#333",
-    fontFamily: "Lato",
-  },
-  instructionsText: {
-    fontSize: hp(2),
-    color: "#444",
-    lineHeight: hp(3),
-    textAlign: "justify",
-    fontFamily: "Lato",
-  },
-  videoLink: {
-    fontSize: hp(2.2),
-    color: "#1E90FF",
-    textDecorationLine: "underline",
-    marginTop: 10,
-    fontFamily: "Roboto",
-  },
-  notFoundContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  notFoundText: {
-    fontSize: hp(3),
-    fontWeight: "bold",
-    color: "#D9534F",
   },
 });
