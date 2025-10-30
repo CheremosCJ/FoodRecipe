@@ -66,9 +66,6 @@ const styles = StyleSheet.create({
     color: "#52525B", // text-neutral-600
     marginBottom: hp(1.5),
   },
-  loading: {
-    marginTop: hp(20),
-  },
   cardContainer: {
     justifyContent: "center",
     marginBottom: hp(1.5),
